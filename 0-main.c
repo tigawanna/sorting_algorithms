@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "sort.h"
 
 /**
@@ -9,7 +10,7 @@
  */
 int main(void)
 {
-    int array[] = {0,0,19, 48, 99, 71, 13, 52, 96, 73, 86, 7, 100, -2};
+    int array[] = {0,1,2,5,4};
     
 
 
