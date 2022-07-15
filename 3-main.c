@@ -1,7 +1,3 @@
-# sorting_algorithms
-
-
-```c
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
@@ -19,11 +15,7 @@ int main(void)
     printf("before sort\n");
     print_array(array, n);
     quick_sort(array, n);
-    printf("afret sort\n");
+    printf("after sort\n");
     print_array(array, n);
     return (0);
 }
-```
-
-
-```c
