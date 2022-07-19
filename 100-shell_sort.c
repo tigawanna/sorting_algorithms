@@ -16,7 +16,7 @@ int tmp;
 if (size < 2)
 return;
 
-while ((gap = gap * 3 + 1) < size);
+while ((gap = gap * 3 + 1) < size)
 
 gap = (gap - 1) / 3;
 
