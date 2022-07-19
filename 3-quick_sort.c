@@ -1,85 +1,75 @@
-
 #include "sort.h"
-#include <time.h>
-
-void swap(int *x, int *y);
-void quicksort(int array[], int length);
-void quicksort_recursion(int array[], int low, int high);
-int partition(int array[], int low, int high);
-
-/**
- * swap - swap items at the two indexes
- * @x: pointer to first value
- * @y: pointer to second value
- */
-
-void swap(int *x, int *y)
-{
-int temp = *x;
-*x = *y;
-*y = temp;
-}
 
 /**
  * quick_sort - sorts an array with the Quicksort algorithm
  * @array: array of ints to sort
- * @n: size of the array
+ * @size: size of the array
  */
-
-void quick_sort(int array[], size_t n)
+void quick_sort(int *array, size_t size)
 {
-if (n < 2)
-return;
-int length = (int)n;
-srand(time(NULL));
-quicksort_recursion(array, 0, length - 1);
+	if (size < 2)
+		return;
+
+	quick_recursion(array, 0, (int)size - 1, size);
 }
 
 /**
- * quicksort_recursion - reapets until allte necessary swaps have happened
- * @array: array of ints to swap values for
- * @low: first index in the partition
- * @high: last index in the partition
- *
- *
+ * quick_recursion - helper function for Quicksort
+ * @array: array to sort
+ * @left: index of the left element
+ * @right: index of the right element
+ * @size: size of the array
  */
+void quick_recursion(int *array, int left, int right, size_t size)
+{
+	int piv;
 
-void quicksort_recursion(int array[], int low, int high)
-{
-if (low < high)
-{
-int pivot_index = partition(array, low, high);
-quicksort_recursion(array, low, pivot_index - 1);
-quicksort_recursion(array, pivot_index + 1, high);
-}
+	if (left < right)
+	{
+		piv = partition(array, left, right, size);
+		quick_recursion(array, left, piv - 1, size);
+		quick_recursion(array, piv + 1, right, size);
+	}
 }
 
 /**
  * partition - gives a piv index for Quicksort
  * @array: array to find the piv in
- * @low: index of the left element
- * @high: index of the right element
+ * @left: index of the left element
+ * @right: index of the right element
+ * @size: size of the array
  *
  * Return: the index of the piv element
  */
-int partition(int array[], int low, int high)
+int partition(int *array, int left, int right, size_t size)
 {
-int pivot_index = high;
-int pivot_value, i, j;
-if (pivot_index != high)
-{
-swap(&array[pivot_index], &array[high]);
-}
-pivot_value = array[high];
-i = low;
-for (j = low; j < high; j++)
-{
-if (array[j] <= pivot_value)
-{
-swap(&array[i], &array[j]);
-i++;
-}
-}
-swap(&array[i], &array[high]);
-return (i);
+	int tmp, i;
+	int j;
+
+	i = left - 1;
+
+	for (j = left; j < right; j++)
+	{
+		if (array[j] < array[right])
+		{
+			i++;
+			if (i != j)
+			{
+				tmp = array[i];
+				array[i] = array[j];
+				array[j] = tmp;
+				print_array(array, size);
+			}
+		}
+	}
+
+	if (array[right] < array[i + 1])
+	{
+		tmp = array[i + 1];
+		array[i + 1] = array[right];
+		array[right] = tmp;
+		print_array(array, size);
+	}
+
+	return (i + 1);
 }
